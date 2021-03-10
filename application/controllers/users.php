@@ -81,5 +81,10 @@
  		$this->session->sess_destroy();
  		redirect(base_url('home'));
  	}
+ 	public function google_login(){
+ 		$this->load->view("templates/header");
+		$this->load->view('pages/Google_login_view');
+ 		$this->load->view("templates/footer");
+ 	}
  }
  

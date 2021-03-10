@@ -35,8 +35,9 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search"> -->
-      <a style="background-color:green;color:white;padding:0.5em;border-radius:5px;" href="<?php echo base_url();?>users/login">LOGIN</a>
-      &nbsp;&nbsp;&nbsp;
+      <a style="background-color:blue;color:white;padding:0.5em;border-radius:5px;margin-right:2em;" href="<?php echo base_url();?>users/google_login">Google Login</a>
+      <a style="background-color:green;color:white;padding:0.5em;border-radius:5px;margin-right:0.5em;" href="<?php echo base_url();?>users/login">LOGIN</a>
+      
       <a  style="background-color:orange;color:white;padding:0.5em;border-radius:5px;" href="<?php echo base_url();?>users/signin">
       SIGN IN </a>
       <a  style="background-color:red;color:white;padding:0.5em;border-radius:5px;margin-left:0.5rem;border-width:0px;" href="<?php echo base_url();?>users/logout">

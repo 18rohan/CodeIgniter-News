@@ -1,4 +1,5 @@
-<h1><?php echo "LOGIN" ?></h1>
+<!-- <h1><?php echo "LOGIN" ?></h1> -->
+
 
   <?php  
         if(!empty($success_msg)){ 
@@ -7,7 +8,8 @@
             echo '<p class="status-msg error">'.$error_msg.'</p>'; 
         } 
     ?>
-  
+
+<div style="display:flex;justify-content:center;flex-direction:row;">
 
 <?php echo form_open('Users/login') ?>
   <fieldset>
@@ -52,10 +54,79 @@
     
     
     <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color:blue;">LOGIN </button>
+
+
     
 </form>
 
+
+<!-- Google Login -->
+<div style="margin-top:10em;">
+  <h1>Google Login</h1>
+  <?php 
+  if(isset($login_button)){
+    $user_data = $this->session->userdata('user_data');
+    echo '<div> Welcome User</div>';
+    echo '<img src="'.$user_data['picture_url'].'';
+    echo '<h3><b>Name: </b>'.$user_data["first_name"].''.$user_data["last_name"].'</h3>';
+    echo '<h3><b>Email: </b>'.$user_data["email"].'</h3>';
+    echo '<h3><a href="'.base_url().'User_authentication/logout"</h3>';
+
+  }else{
+    echo '<div align="center">'.$login_button.'</div>';
+  }
+
+  ?>
+<!-- <a href="<?php echo base_url(); ?>User_Authentication/glogin"><img src="<?php echo base_url('assets/images/google-signin.png'); ?>" style="width:70%; height:auto;"/></a> -->
+<!-- <form action="<?php echo base_url(); ?>Users" methods="POST">
+   <div class="form-group">
+      <label for="exampleInputEmail1">Email Address</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        id="emailID" 
+        name="emailID" 
+        aria-describedby="emailHelp" 
+        placeholder="Enter email"
+        oninput="checkEmail()"
+        >
+      <small id="emailHelp" class="text-danger">
+       
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input 
+        type="password" 
+        class="form-control" 
+        id="password" 
+        name="password" 
+        placeholder="Enter Password"
+        oninput="checkPassword()"
+
+        >
+        <small id="passwordHelp" class="text-danger">
+       
+      </small>
+      <small id="passwordHelp1" class="text-danger">
+       
+      </small>
+    </div>
+    
+    
+    
+    
+    
+    <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color:blue;">Google login </button>
+
+
+</form>
+ -->
+</div>
+</fieldset>
+</div>
 <script type="text/javascript">
+  console.log(Notification.permission);
 	var email = document.getElementById("emailID");
 	var password = document.getElementById("password");
 
@@ -102,5 +173,7 @@
 
             }
         }    
+
+
 
 </script>

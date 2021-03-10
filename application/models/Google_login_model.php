@@ -1,0 +1,63 @@
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed'); 
+ 
+class Google_login_model extends CI_Model { 
+     
+    function __construct() { 
+        $this->tableName = 'users'; 
+    } 
+
+    function Is_already_register($id){
+        $this->db->where('oauth_uid',$id);
+        $query = $this->db->get('social-users'); 
+        if($query->num_rows()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+     
+    function Update_user_data($data, $id){
+        $this->db->where('oauth_uid',$id);
+        $this->db->where('social-users',$data);
+    }
+    function Insert_user_data($data){
+        $this->db->insert('social-users',$data);
+    }
+    public function checkUser($data = array()){ 
+        $this->db->select('id'); 
+        $this->db->from($this->tableName); 
+         
+        $con = array( 
+            'oauth_provider' => $data['oauth_provider'], 
+            'oauth_uid' => $data['oauth_uid'] 
+        ); 
+        $this->db->where($con); 
+        $query = $this->db->get(); 
+         
+        $check = $query->num_rows(); 
+        if($check > 0){ 
+            // Get prev user data 
+            $result = $query->row_array(); 
+             
+            // Update user data 
+            $data['modified'] = date("Y-m-d H:i:s"); 
+            $update = $this->db->update($this->tableName, $data, array('id' => $result['id'])); 
+             
+            // Get user ID 
+            $userID = $result['id']; 
+        }else{ 
+            // Insert user data 
+            $data['created'] = date("Y-m-d H:i:s"); 
+            $data['modified'] = date("Y-m-d H:i:s"); 
+            $insert = $this->db->insert($this->tableName, $data); 
+             
+            // Get user ID 
+            $userID = $this->db->insert_id(); 
+        } 
+         
+        // Return user ID 
+        return $userID?$userID:false; 
+    } 
+ 
+}

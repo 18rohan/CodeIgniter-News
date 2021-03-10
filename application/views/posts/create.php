@@ -22,7 +22,30 @@
     </div>
     
     <button type="submit" class="btn btn-success" style="background-color:green;">SUBMIT</button>
+
     
 </form>
 
-<p><?php echo $links; ?></p>
+
+
+<button type="button" class="btn btn-danger"  onclick="subscribe()">SUBSCRIBE</button>
+
+
+
+<!-- <p><?php echo $links; ?></p> -->
+
+<script>
+    addEventListener('load', async ()=>{
+      let sw = await navigator.serviceWorker.register('<?php echo base_url()?>assets/js/sw.js');
+      console.log(sw);
+    })
+    async function subscribe(){
+      let sw = await navigator.serviceWorker.ready;
+      console.log(sw);
+      let push = await sw.pushManager.subscribe({
+        userVisibleOnly:true,
+        applicationServerKey:'BFKc-Vv7zdeg1qSALj7Blw87zFZgmQHPYRRIrQQLYoo7KGoP1X_TEbALHxrug0xAUYUKhrAEF-uTvU7Wt1OGZSo'
+      })
+      console.log(JSON.stringify(push));
+    }
+  </script>
